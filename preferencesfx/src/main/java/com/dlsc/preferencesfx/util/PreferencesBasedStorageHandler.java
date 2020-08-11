@@ -297,14 +297,6 @@ public abstract class PreferencesBasedStorageHandler implements StorageHandler {
 
   private String getSerializedPreferencesValue(String breadcrumb, String serializedDefault) {
     String serialized = preferences.get(hash(breadcrumb), serializedDefault);
-    if (serialized == serializedDefault) {
-      // try to get preferences value with legacy hashing method
-      serialized = preferences.get(deprecatedHash(breadcrumb), serializedDefault);
-      if (serialized != serializedDefault) {
-        LOGGER.warn("Preferences value of {} was loaded using the legacy hashing method. "
-            + "Value will be saved using the new hashing method with next save.", breadcrumb);
-      }
-    }
     return serialized;
   }
 
